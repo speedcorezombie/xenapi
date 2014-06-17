@@ -42,7 +42,7 @@ echo 'nameserver 188.93.212.133' >> ${TPL_ROOT}/etc/resolv.conf
 sed -i -e 's/^root:*$/root:__PASSWORD_HASH__:13879:0:99999:7:::/' ${TPL_ROOT}/etc/shadow
 
 # change disks uuid to dev
-sed -i -e 's#root=UUID=[0-9a-z-]\{36\}#root=/dev/xvda#'       ${TPL_ROOT}/etc/grub.conf
+sed -i -e 's#root=UUID=[0-9a-z-]\{36\}#root=/dev/xvda#'       ${TPL_ROOT}/boot/grub/grub.conf
 sed -i -e 's#^UUID=[0-9a-z-]\{36\}\s*/#/dev/xvda\t\t/#'       ${TPL_ROOT}/etc/fstab
 sed -i -e 's#^UUID=[0-9a-z-]\{36\}\s*swap#/dev/xvdb\t\tswap#' ${TPL_ROOT}/etc/fstab
 # archive template
