@@ -30,7 +30,7 @@ echo 'GATEWAY=__GATEWAY__'   >> ${TPL_ROOT}/etc/sysconfig/network
 
 echo 'DEVICE="eth0"'          > ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
 echo 'BOOTPROTO="static"'    >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
-echo 'IPADDR="_IPADDR_"'     >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
+echo 'IPADDR="__IPADDR__"'     >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
 echo 'NETMASK="__NETMASK__"' >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
 echo 'ONBOOT="yes"'          >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
 echo 'TYPE="Ethernet"'       >> ${TPL_ROOT}/etc/sysconfig/network-scripts/ifcfg-eth0
