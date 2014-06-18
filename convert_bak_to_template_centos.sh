@@ -20,7 +20,7 @@ truncate -s0 ${TPL_ROOT}/root/.bash_history
 # uncomment below for clear cron and mail
 # rm -f /var/spool/cron/* /var/spool/mail/*
 # delete ssh host keys
-rm -f /etc/ssh/ssh_host_*
+rm -f  ${TPL_ROOT}/etc/ssh/ssh_host_*
 
 # clear network settings 
 echo 'NETWORKING=yes'         > ${TPL_ROOT}/etc/sysconfig/network
