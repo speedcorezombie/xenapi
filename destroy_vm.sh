@@ -13,5 +13,5 @@ SWAP=${NAME}_swap
 
 virsh destroy ${NAME}
 virsh undefine ${NAME}
-lvremove /dev/${VG}/${DISK}
-lvremove /dev/${VG}/${SWAP}
+lvremove -f /dev/${VG}/${DISK}
+lvremove -f /dev/${VG}/${SWAP}
