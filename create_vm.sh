@@ -70,5 +70,5 @@ sed -i -e 's/__VG__/'${VG}'/' ${DOM_PATH}/${NAME}.xml
 sed -i -e 's/__DISK_SRC_DEV__/'${DISK}'/' ${DOM_PATH}/${NAME}.xml
 sed -i -e 's/__SWAP_SRC_DEV__/'${SWAP}'/' ${DOM_PATH}/${NAME}.xml
 virsh define ${DOM_PATH}/${NAME}.xml 
-virsh define autostart ${NAME}
+virsh autostart ${NAME}
 virsh start ${NAME}
