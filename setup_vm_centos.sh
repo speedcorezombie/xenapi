@@ -8,8 +8,8 @@ MASK=$2
 GATE=$3
 HOST=$4
 PASS=$5
-SALT=`pwgen -n1`
 TPL_ROOT=$6
+SALT=`pwgen -n1`
 HASH=`./hgen.pl $PASS $SALT`
 
 sed -i -e 's/__HOSTNAME__/'$HOST'/'  ${TPL_ROOT}/etc/sysconfig/network

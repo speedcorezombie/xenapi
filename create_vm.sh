@@ -1,17 +1,23 @@
 #!/bin/bash
 # Parameters:
 # name template 
+if [ $# -lt 5  ]; then
+        echo "Usage: create_vm.sh NAME TEMPLATE PACKAGE IP PASS"
+        exit 1
+fi
+
+
 source ./conf.sh
-NAME=
-TEMPLATE=
-PACKAGE=
-IP=
-PASSWORD=
+NAME=$1
+TEMPLATE=$2
+PACKAGE=$3
+IP=$4
+PASSWORD=$5
 HOST=vm${NAME}.xen.tech-logol.ru
 UUID=`uuidgen`
 DISK=${NAME}
 SWAP=${NAME}_swap
-TPL_ROOT=/templates/tmp/${DISK}
+TPL_ROOT=${TMP_PATH}/${DISK}
 case "PACKAGE" in
 	s)
 		DISK_SIZE=10

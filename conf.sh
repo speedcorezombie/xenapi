@@ -3,6 +3,8 @@
 DOM_PATH=/templates/build
 # path to templates
 TPL_PATH=/templates
+# tmp dir path
+TMP_PATH=/templates/tmp
 # current volume group
 VG=vg_vm
 
