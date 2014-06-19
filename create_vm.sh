@@ -18,7 +18,7 @@ UUID=`uuidgen`
 DISK=${NAME}
 SWAP=${NAME}_swap
 TPL_ROOT=${TMP_PATH}/${DISK}
-case "PACKAGE" in
+case "${PACKAGE}" in
 	s)
 		DISK_SIZE=10
 		SWAP_SIZE=1
@@ -38,13 +38,13 @@ esac
 
 # create LVMs for disk and swap, if they present - stop creating
 if [ ! -e /dev/${VG}/${DISK} ]; then
-	/usr/sbin/lvcreate -L${DISK_SIZE}G -n ${DISK} ${VG}
+	lvcreate -L${DISK_SIZE}G -n ${DISK} ${VG}
 else
 	echo "ERROR: lvm is present"
 	exit 3
 fi
 if [ ! -e /dev/${VG}/${SWAP} ]; then
-	/usr/sbin/lvcreate -L${SWAP_SIZE}G -n ${SWAP} ${VG}
+	lvcreate -L${SWAP_SIZE}G -n ${SWAP} ${VG}
 else
         echo "ERROR: lvm is present"
         exit 3
