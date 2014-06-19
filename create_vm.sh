@@ -54,7 +54,7 @@ fi
 mount /dev/${VG}/${DISK} ${TPL_ROOT}
 tar xzf /templates/${TEMPLATE}.tgz -C ${TPL_ROOT}
 # set network and password parameters
-./setup_vm_${TEMPLATE}.sh ${IP} ${MASK} ${GATE} ${HOST} ${PASS}
+./setup_vm_${TEMPLATE}.sh ${IP} ${MASK} ${GATE} ${HOST} ${PASS} ${TPL_ROOT}
 umount ${TPL_ROOT}
 rmdir ${TPL_ROOT}
 cp ${DOM_PATH}/template_${PACKAGE}.xml ${DOM_PATH}/${NAME}.xml
