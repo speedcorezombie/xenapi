@@ -15,3 +15,5 @@ virsh destroy ${NAME}
 virsh undefine ${NAME}
 lvremove -f /dev/${VG}/${DISK}
 lvremove -f /dev/${VG}/${SWAP}
+${DOM_PATH}/${NAME}.xml
+
