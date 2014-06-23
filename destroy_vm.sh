@@ -11,9 +11,9 @@ NAME=$1
 DISK=${NAME}
 SWAP=${NAME}_swap
 
-virsh destroy ${NAME}
-virsh undefine ${NAME}
-lvremove -f /dev/${VG}/${DISK}
-lvremove -f /dev/${VG}/${SWAP}
-${DOM_PATH}/${NAME}.xml
+${VIRSH} destroy ${NAME}
+${VIRSH} undefine ${NAME}
+${LVREMOVE} -f /dev/${VG}/${DISK}
+${LVREMOVE} -f /dev/${VG}/${SWAP}
+${RM} ${DOM_PATH}/${NAME}.xml
 
