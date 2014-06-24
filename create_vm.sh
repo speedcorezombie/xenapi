@@ -2,22 +2,22 @@
 # Parameters:
 # name template package ip pass
 if [ $# -lt 5  ]; then
-        echo "Usage: create_vm.sh NAME TEMPLATE PACKAGE IP PASS"
+        echo "Usage: create_vm.sh VMID TEMPLATE PACKAGE IP PASS"
         exit 1
 fi
 
 source ./conf.sh
 ACTION='create'
 
-NAME=$1
+VMID=$1
 TEMPLATE=$2
 PACKAGE=$3
 IP=$4
 PASSWORD=$5
-HOST=vm${NAME}.${TECHDOMAIN}
+HOST=vm${VMID}.${TECHDOMAIN}
 UUID=`${UUIDGEN}`
-DISK=${NAME}
-SWAP=${NAME}_swap
+DISK=${VMID}
+SWAP=${VMID}_swap
 TPL_ROOT=${TMP_PATH}/${DISK}
 
 
@@ -73,14 +73,14 @@ ${UMOUNT} ${TPL_ROOT}
 ${RMDIR} ${TPL_ROOT}
 
 # Create domain xml file
-${CP} ${DOM_PATH}/template_${PACKAGE}.xml ${DOM_PATH}/${NAME}.xml
-${SED} -i -e 's/__NAME__/'${NAME}'/' ${DOM_PATH}/${NAME}.xml
-${SED} -i -e 's/__UUID__/'${UUID}'/' ${DOM_PATH}/${NAME}.xml
-${SED} -i -e 's/__VG__/'${VG}'/' ${DOM_PATH}/${NAME}.xml
-${SED} -i -e 's/__DISK_SRC_DEV__/'${DISK}'/' ${DOM_PATH}/${NAME}.xml
-${SED} -i -e 's/__SWAP_SRC_DEV__/'${SWAP}'/' ${DOM_PATH}/${NAME}.xml
+${CP} ${DOM_PATH}/template_${PACKAGE}.xml ${DOM_PATH}/${VMID}.xml
+${SED} -i -e 's/__NAME__/'${VMID}'/' ${DOM_PATH}/${VMID}.xml
+${SED} -i -e 's/__UUID__/'${UUID}'/' ${DOM_PATH}/${VMID}.xml
+${SED} -i -e 's/__VG__/'${VG}'/' ${DOM_PATH}/${VMID}.xml
+${SED} -i -e 's/__DISK_SRC_DEV__/'${DISK}'/' ${DOM_PATH}/${VMID}.xml
+${SED} -i -e 's/__SWAP_SRC_DEV__/'${SWAP}'/' ${DOM_PATH}/${VMID}.xml
 
 # Define and start VM
-${VIRSH} define ${DOM_PATH}/${NAME}.xml 
-${VIRSH} autostart ${NAME}
-${VIRSH} start ${NAME}
+${VIRSH} define ${DOM_PATH}/${VMID}.xml 
+${VIRSH} autostart ${VMID}
+${VIRSH} start ${VMID}

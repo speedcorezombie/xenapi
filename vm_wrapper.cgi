@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source conf.sh
+source ./conf.sh
 
 # Generate query id
 queryid_gen

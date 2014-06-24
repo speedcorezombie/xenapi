@@ -49,6 +49,14 @@ queryid_gen() {
         export QUERYID
 }
 
+# Lock VM
+lock() {
+if [ "${VMID}" ] && [ "${QUERYID}" ]; then
+        ${TOUCH} /tmp/${VMID}.lock
+        ${TOUCH} /tmp/${QUERYID}.lock
+fi
+}
+
 # Write message in log file
 log() {
 	DATE=`date +"%D %T %z"`
@@ -56,15 +64,27 @@ log() {
 }
 
 # Write error message in log file and exit
-
 error() {
-        if [  "${QUERYFILE}" ] && [  "${LOCKFILE}" ]; then
+        if [ "${QUERYFILE}" ] && [ "${LOCKFILE}" ]; then
                 echo "500: $*" >> ${QUERYFILE}.lock
                 ${MV} -f ${QUERYFILE}.lock ${QUERYFILE}.log
                 ${RM} -f ${LOCKFILE}
         fi
 
-        log "ERROR: $*"
+        log  "ERROR: $*"
         echo "500: $*"
         exit 1
+}
+
+# Write success message and delete locks
+success() {
+        if [ "${QUERYFILE}" ] && [ "${LOCKFILE}" ]; then
+                echo "200: $*" >> ${QUERYFILE}.lock
+                $MV -f ${QUERYFILE}.lock ${QUERYFILE}.log
+                $RM -f ${LOCKFILE}
+        fi
+
+        log  "SUCCESS: $*"
+        echo "200: $*"
+        exit 0
 }

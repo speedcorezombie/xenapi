@@ -2,18 +2,18 @@
 # Parameters:
 # name
 if [ $# -lt 1  ]; then
-        echo "Usage: destroy_vm.sh NAME"
+        echo "Usage: destroy_vm.sh VMID"
         exit 1
 fi
 
 source ./conf.sh
-NAME=$1
-DISK=${NAME}
-SWAP=${NAME}_swap
+VMID=$1
+DISK=${VMID}
+SWAP=${VMID}_swap
 
-${VIRSH} destroy ${NAME}
-${VIRSH} undefine ${NAME}
+${VIRSH} destroy ${VMID}
+${VIRSH} undefine ${VMID}
 ${LVREMOVE} -f /dev/${VG}/${DISK}
 ${LVREMOVE} -f /dev/${VG}/${SWAP}
-${RM} ${DOM_PATH}/${NAME}.xml
+${RM} ${DOM_PATH}/${VMID}.xml
 
