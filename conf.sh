@@ -13,6 +13,7 @@ PWGEN='/usr/bin/pwgen'
 RM='/bin/rm'
 RMDIR='/bin/rmdir'
 SED='/bin/sed'
+SUDO='/usr/bin/sudo'
 TAR='/usr/bin/sudo /bin/tar'
 UMOUNT='/usr/bin/sudo /bin/umount'
 UUIDGEN='/usr/bin/uuidgen'
@@ -21,6 +22,7 @@ VIRSH='/usr/bin/sudo /usr/bin/virsh'
 # Log file
 LOG='/var/log/xenapi/xenapi.log'
 
+CGI_PATH='/var/www/xenapi/cgi-bin'
 # path to domain's package xml 
 DOM_PATH='/templates/build'
 # path to templates
