@@ -1,13 +1,14 @@
 #!/bin/bash
 # Parameters:
-# name template 
+# name template package ip pass
 if [ $# -lt 5  ]; then
         echo "Usage: create_vm.sh NAME TEMPLATE PACKAGE IP PASS"
         exit 1
 fi
 
-
 source ./conf.sh
+ACTION='create'
+
 NAME=$1
 TEMPLATE=$2
 PACKAGE=$3
@@ -18,6 +19,9 @@ UUID=`${UUIDGEN}`
 DISK=${NAME}
 SWAP=${NAME}_swap
 TPL_ROOT=${TMP_PATH}/${DISK}
+
+
+# Determine disk and swap size
 case "${PACKAGE}" in
 	s)
 		DISK_SIZE=10

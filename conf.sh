@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#######################################################
+# Variables
+#
 # Commands
 # for some command needed add sudo permission
 CP='/bin/cp'
@@ -35,5 +38,18 @@ VG='vg_vm'
 # Network settings
 NETMASK='255.255.254.0'
 GATEWAY='91.195.124.1'
-
 TECHDOMAIN='xen.tech-logol.ru'
+
+#########################################################
+# Functions
+
+queryid_gen() {
+        QUERYID="`/bin/date +%s`-`printf "%05.f\n" $RANDOM`" 
+        export QUERYID
+}
+
+# log (msg) - Write message to log file
+log() {
+	DATE=`date +"%D %T %z"`
+        echo "${DATE} ${QUERYID} ${ACTION}: $*" >> $LOG
+}
