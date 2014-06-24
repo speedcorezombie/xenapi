@@ -12,6 +12,7 @@ MKDIR='/bin/mkdir'
 MKFS='/usr/bin/sudo /sbin/mkfs.ext4'
 MKSWAP='/usr/bin/sudo /sbin/mkswap'
 MOUNT='/usr/bin/sudo /bin/mount'
+MV='/bin/mv'
 PWGEN='/usr/bin/pwgen'
 RM='/bin/rm'
 RMDIR='/bin/rmdir'
@@ -48,8 +49,22 @@ queryid_gen() {
         export QUERYID
 }
 
-# log (msg) - Write message to log file
+# Write message in log file
 log() {
 	DATE=`date +"%D %T %z"`
-        echo "${DATE} ${QUERYID} ${ACTION}: $*" >> $LOG
+        echo "[${DATE}] ${QUERYID} ${ACTION}: $*" >> $LOG
+}
+
+# Write error message in log file and exit
+
+error() {
+        if [  "${QUERYFILE}" ] && [  "${LOCKFILE}" ]; then
+                echo "500: $*" >> ${QUERYFILE}.lock
+                ${MV} -f ${QUERYFILE}.lock ${QUERYFILE}.log
+                ${RM} -f ${LOCKFILE}
+        fi
+
+        log "ERROR: $*"
+        echo "500: $*"
+        exit 1
 }
