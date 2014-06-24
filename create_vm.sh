@@ -61,6 +61,10 @@ ${MOUNT} /dev/${VG}/${DISK} ${TPL_ROOT}
 ${TAR} xzf ${TPL_PATH}/${TEMPLATE}.tgz -C ${TPL_ROOT}
 # set network and password parameters
 ${SUDO} ${CGI_PATH}/setup_vm_${TEMPLATE}.sh ${IP} ${NETMASK} ${GATEWAY} ${HOST} ${PASSWORD} ${TPL_ROOT}
+if [ ! $? -eq 0 ]; then 
+	echo "ERROR: Setup failed"
+	exit 4
+fi
 ${UMOUNT} ${TPL_ROOT}
 ${RMDIR} ${TPL_ROOT}
 
