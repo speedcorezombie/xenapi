@@ -1,0 +1,34 @@
+<domain type='xen'>
+  <name>__NAME__</name>
+  <uuid>__UUID__</uuid>
+  <memory unit='MiB'>__MEMSIZE__</memory>
+  <currentMemory unit='MiB'>__MEMSIZE__</currentMemory>
+  <vcpu placement='static'>__CPU__</vcpu>
+  <bootloader>/usr/bin/pygrub</bootloader>
+  <os>
+    <type>linux</type>
+  </os>
+  <clock offset='utc' adjustment='reset'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>restart</on_crash>
+  <devices>
+    <disk type='block' device='disk'>
+      <driver name='phy'/>
+      <source dev='/dev/__VG__/__DISK_SRC_DEV__'/>
+      <target dev='xvda' bus='xen'/>
+    </disk>
+    <disk type='block' device='disk'>
+      <driver name='phy'/>
+      <source dev='/dev/__VG__/__SWAP_SRC_DEV__'/>
+      <target dev='xvdb' bus='xen'/>
+    </disk>
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <script path='/etc/xen/scripts/vif-bridge'/>
+    </interface>
+    <console type='pty'>
+      <target type='xen' port='0'/>
+    </console>
+  </devices>
+</domain>
